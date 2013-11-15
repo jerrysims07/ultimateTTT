@@ -7,6 +7,21 @@ var socket;
 function initialize(){
   $(document).foundation();
   initializeSocketIO();
+  initializeBoard();
+
+  $('#ultimateBoard').on('click', '.active', clickUltimateBoard);
+}
+
+function initializeBoard()
+{
+  // assign 'active' class to all squares
+  $('.square').addClass('active');
+}
+
+function clickUltimateBoard()
+{
+  console.log('clicked active');
+
 }
 
 function initializeSocketIO(){
