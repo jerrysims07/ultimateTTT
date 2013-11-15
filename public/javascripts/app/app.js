@@ -40,8 +40,20 @@ function clickUltimateBoard()
 
   // test for win
     // test for ultimate win
-  testForWin(board);
+  var tempWinFlag= testForWin(board);
 
+  if(tempWinFlag )
+  {
+    // update ultimate Board array with active player
+    ultimateBoard[board]= (activePlayer === 'X') ? 1 : 2;
+
+    // send to browser winFlag for display
+    // test for ultimate win
+    var bigWinner = testForWin(ultimateBoard);
+
+console.log('ultimateBoard: '+ultimateBoard);
+console.log('big winner = '+bigWinner);
+  }
 
 
   // Switch players
@@ -54,6 +66,7 @@ function updateActiveSquares($this)
   $('.square').removeClass('active');
   var nextBoard = $this.attr('data-square');
   var activeSquares = $('.square[data-board =' + nextBoard + ']');
+  $('.square[data-board =' + nextBoard + ']').parent().addClass('high');
   for(var i = 0; i < activeSquares.length; i++){
     if(!$(activeSquares[i]).text())
       $(activeSquares[i]).addClass('active');
@@ -75,9 +88,20 @@ function updateBoardArray($this)
 
 
 function testForWin(board){
+  winFlag = {};
   winFlag.rowOne = rowOne(board);
-  // rowTwo(board);
-  // rowThree(board);
+  winFlag.rowTwo = rowTwo(board);
+  winFlag.rowThree = rowThree(board);
+  winFlag.colOne = colOne(board);
+  winFlag.colTwo = colTwo(board);
+  winFlag.colThree = colThree(board);
+  winFlag.diagRight = diagRight(board);
+  winFlag.diagLeft = diagLeft(board);
+console.log(winFlag);
+
+  return (  winFlag.rowOne || winFlag.rowTwo || winFlag.rowThree ||
+            winFlag.colOne || winFlag.colTwo || winFlag.colThree ||
+            winFlag.diagRight || winFlag.diagLeft);
 }
 
 
@@ -87,8 +111,33 @@ function rowOne(board){
   return (miniBoards[board][0] && (miniBoards[board][0] === miniBoards[board][1] && miniBoards[board][0] === miniBoards[board][2]));
 }
 
+function rowTwo(board){
+  return (miniBoards[board][3] && (miniBoards[board][3] === miniBoards[board][4] && miniBoards[board][3] === miniBoards[board][5]));
+}
 
+function rowThree(board){
+  return (miniBoards[board][6] && (miniBoards[board][6] === miniBoards[board][7] && miniBoards[board][6] === miniBoards[board][8]));
+}
 
+function colOne(board){
+  return (miniBoards[board][0] && (miniBoards[board][0] === miniBoards[board][3] && miniBoards[board][6] === miniBoards[board][0]));
+}
+
+function colTwo(board){
+  return (miniBoards[board][1] && (miniBoards[board][1] === miniBoards[board][4] && miniBoards[board][7] === miniBoards[board][1]));
+}
+
+function colThree(board){
+  return (miniBoards[board][2] && (miniBoards[board][2] === miniBoards[board][5] && miniBoards[board][8] === miniBoards[board][2]));
+}
+
+function diagRight(board){
+  return (miniBoards[board][0] && (miniBoards[board][0] === miniBoards[board][4] && miniBoards[board][0] === miniBoards[board][8]));
+}
+
+function diagLeft(board){
+  return (miniBoards[board][2] && (miniBoards[board][2] === miniBoards[board][4] && miniBoards[board][2] === miniBoards[board][6]));
+}
 
 
 
