@@ -1,9 +1,8 @@
-body {
-  background: url(http://www.blirk.net/wallpapers/1920x1080/gradient-wallpaper-3.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+div { box-sizing: border-box; }
+.container {
+  width: 760px;
+  height: 720px;
+  background: #767676;
 }
 .ultimate-board {
   /*width: 31.5em;*/
@@ -20,7 +19,7 @@ body {
   float: left;
   width: 32.67%;
   height: 32.67%;
-  margin: 1%;
+  /*margin: 1%;*/
   background: #fff1d8;
   font-family: 'Arial', sans-serif;
   font-size: 72px;
@@ -38,30 +37,4 @@ body {
 }
 .square:hover {
   background: whitesmoke;
-}
-
-/**/
-/* version previous to LS UI*/
-/**/
-
-@base: #f0f0f0;
-
-body{
-  background-color: @base;
-}
-
-.square
-{
-  height: 20px;
-  width:20px;
-  border: 1px solid black;
-  float: left;
-}
-
-.board
-{
-  width: 70px;
-  float: left;
-  margin-bottom: 10px;
-
 }
