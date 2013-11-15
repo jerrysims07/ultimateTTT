@@ -1,6 +1,7 @@
-var async = require('async')
-var __ = require('lodash')
-var io
+var async = require('async');
+var __ = require('lodash');
+var m = require('../lib/mechanics');
+var io;
 
 exports.connection = function(socket){
   io = this
