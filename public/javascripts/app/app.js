@@ -6,6 +6,7 @@ var socket;
 var activePlayer = 'X';
 var miniBoards = [];
 var ultimateBoard = [0,0,0,0,0,0,0,0,0];
+var winFlag = {};
 
 function initialize(){
   $(document).foundation();
@@ -35,15 +36,16 @@ function clickUltimateBoard()
   $this.text(activePlayer);
   updateBoardArray($this);
   updateActiveSquares($this);
+  var board = $this.attr('data-board');
 
   // test for win
     // test for ultimate win
+  testForWin(board);
+
+
 
   // Switch players
   activePlayer = (activePlayer === 'X') ? 'O' : 'X';
-
-
-
 }
 
 function updateActiveSquares($this)
@@ -69,6 +71,29 @@ function updateBoardArray($this)
   console.log('board '+x+': ');
   console.log(miniBoards[x]);
 }
+
+
+
+function testForWin(board){
+  winFlag.rowOne = rowOne(board);
+  // rowTwo(board);
+  // rowThree(board);
+}
+
+
+// Test Win functions
+
+function rowOne(board){
+  return (miniBoards[board][0] && (miniBoards[board][0] === miniBoards[board][1] && miniBoards[board][0] === miniBoards[board][2]));
+}
+
+
+
+
+
+
+
+
 
 
 function initializeSocketIO(){
