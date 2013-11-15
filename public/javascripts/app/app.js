@@ -3,13 +3,14 @@
 $(document).ready(initialize);
 
 var socket;
+var activePlayer = 'X';
 
 function initialize(){
   $(document).foundation();
   initializeSocketIO();
   initializeBoard();
 
-  $('#ultimateBoard').on('click', '.active', clickUltimateBoard);
+  $('#ultimate-board').on('click', '.active', clickUltimateBoard);
 }
 
 function initializeBoard()
@@ -20,8 +21,19 @@ function initializeBoard()
 
 function clickUltimateBoard()
 {
-  console.log('clicked active');
-
+  var $this = $(this);
+  $this.text(activePlayer);
+  // Switch players
+  activePlayer = (activePlayer === 'X') ? 'O' : 'X';
+  // Update board array
+  // Update active squares
+  $('.square').removeClass('active');
+  var nextBoard = $this.attr('data-square');
+  var activeSquares = $('.square[data-board =' + nextBoard + ']');
+  for(var i = 0; i < activeSquares.length; i++){
+    if(!$(activeSquares[i]).text())
+      $(activeSquares[i]).addClass('active');
+  }
 }
 
 function initializeSocketIO(){
